@@ -48,7 +48,7 @@ def problem_1():
     f = newton(k, Re, D/2)
     x = l*v**2/(19.62*D)
     hf = f * x
-    print("The friction factor is: ", hf)
+    print("The head loss is: ", round(hf, 3))
 
 def problem_2():
     # l = float(input("Enter the length of pipe: "))
@@ -62,13 +62,14 @@ def problem_2():
     nu = 0.00001
     hf = 53.6260619067951
     f = 0.02
-    x = 12.1 * hf * D**5 / l
-    Q = sqrt(x/f)
-    v = Q / (3.14159265 * D ** 2 / 4)
-    Re = v * D / nu
-    f = newton(k, Re, D/2)
-    Q = sqrt(x/f)
-    print("The discharge is: ", Q)
+    for i in range(10):
+        x = 12.1 * hf * D**5 / l
+        Q = sqrt(x/f)
+        v = Q / (3.14159265 * D ** 2 / 4)
+        Re = v * D / nu
+        f = newton(k, Re, D/2)
+        Q = sqrt(x/f)
+    print("The discharge is: ", round(Q, 3))
 
 def problem_3():
     # l = float(input("Enter the length of pipe: "))
@@ -81,14 +82,15 @@ def problem_3():
     Q = 0.15
     nu = 0.00001
     hf = 53.6260619067951
-    x = l * Q**2 / (12.1 * hf)
     f = 0.02
-    D = f**(1/3) * x
-    v = Q / (3.14159265 * D ** 2 / 4)
-    Re = v * D / nu
-    f = newton(k, Re, D/2) 
-    D = f**(1/3) * x
-    print("Diameter of pipe: ", D)
+    for i in range(10):
+        x = l * Q**2 / (12.1 * hf)
+        D = f**(1/3) * x
+        v = Q / (3.14159265 * D ** 2 / 4)
+        Re = v * D / nu
+        f = newton(k, Re, D/2) 
+        D = f**(1/3) * x
+    print("Diameter of pipe: ", round(D, 3))
 
 
 def main():
@@ -99,5 +101,6 @@ def main():
         problem_2()
     elif scanf == 3:
         problem_3()
+
 if __name__ == "__main__":
     main()
